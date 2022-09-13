@@ -5,56 +5,45 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-container class="px-0">
+        <v-toolbar-title>Bansos Covid-19</v-toolbar-title>
+      </v-container>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <FormulirPenerima v-if="isFormulirMode" @submit="handleFormulirPenerimaSubmit" />
+      <PreviewPenerima v-else :data="formulirData" @back="handlePreviewPenerimaBack" />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import FormulirPenerima from "@/components/FormulirPenerima";
+import PreviewPenerima from "@/components/PreviewPenerima";
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    PreviewPenerima,
+    FormulirPenerima
   },
-
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      isFormulirMode: true,
+      formulirData: null
+    }
+  },
+  methods: {
+    handleFormulirPenerimaSubmit(value) {
+      this.isFormulirMode = false;
+      this.formulirData = value;
+      window.scrollTo(0,0);
+    },
+    handlePreviewPenerimaBack() {
+      this.isFormulirMode = true;
+      this.formulirData = null;
+      window.scrollTo(0,0);
+    }
+  }
 };
 </script>
