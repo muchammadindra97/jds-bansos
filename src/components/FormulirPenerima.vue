@@ -112,7 +112,7 @@
           >
             <template v-for="item in JENIS_KELAMIN">
               <v-radio
-                  :key="item"
+                  :key="item.value"
                   :label="item.text"
                   :value="item"
               ></v-radio>
