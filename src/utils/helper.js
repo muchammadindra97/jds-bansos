@@ -4,3 +4,26 @@ export function generateImagePreviewSrc(file) {
   }
   return null;
 }
+
+export function fetchBackend(data) {
+  const response = {
+    success: false,
+    message: '',
+    data: null
+  }
+
+  const isSuccess = Math.random() > 0.5;
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        response.success = true;
+        response.data    = data;
+        resolve(response);
+      } else {
+        response.message = 'Internal Server Error';
+        reject(response);
+      }
+    }, 1500);
+  });
+}

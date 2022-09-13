@@ -286,6 +286,7 @@
 
           <v-btn
               :disabled="!isFormValid"
+              :loading="isSubmitting"
               color="success"
               class="mr-4"
               @click="submit"
@@ -304,7 +305,7 @@ import {
   JENIS_KELAMIN,
   ALASAN_BANTUAN,
 } from "@/utils/constant";
-import {generateImagePreviewSrc} from "@/utils/helper";
+import {generateImagePreviewSrc, fetchBackend} from "@/utils/helper";
 
 export default {
   name: "FormulirPenerima",
@@ -354,6 +355,7 @@ export default {
         fotoKTP: null,
         fotoKartuKeluarga: null,
       },
+      isSubmitting: false
     };
   },
   methods: {
@@ -405,12 +407,6 @@ export default {
 
       this.kelurahanDesaList.isLoading = false;
     },
-    generateImagePreviewSrc(file) {
-      if (file !== null && file.type.includes("image")) {
-        return URL.createObjectURL(file);
-      }
-      return null;
-    },
     validateFile(file) {
       if (file !== null && !file.type.includes("image")) {
         return "File yang dipilih bukan gambar!";
@@ -420,15 +416,32 @@ export default {
         this.fileTypeError.fotoKTP = null;
       }
     },
-    submit() {
-      const isValid = this.$refs.form.validate();
+    async submit() {
+      try {
+        this.isSubmitting = true;
+        const isFormValid = this.$refs.form.validate();
 
-      if (isValid) {
-        this.$emit('submit', {
-          ...this.formData,
-          srcPreviewKTP: this.srcPreviewKTP,
-          srcPreviewKK: this.srcPreviewKK
+        if (isFormValid) {
+          const result = await fetchBackend(this.formData);
+
+          this.$emit('submit', result.data);
+          this.$emit('notification', {
+            success: true,
+            message: 'Data penerima berhasil dikirim!'
+          });
+        } else {
+          this.$emit('notification', {
+            success: false,
+            message: 'Periksa kembali isian form Anda!'
+          });
+        }
+      } catch (e) {
+        this.$emit('notification', {
+          success: false,
+          message: 'Terjadi kesalahan server, cobalah beberapa saat lagi!'
         });
+      } finally {
+        this.isSubmitting = false;
       }
     },
   },
