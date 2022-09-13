@@ -9,21 +9,21 @@
         <DataItem label="Foto KTP" :value="data.fotoKTP.name">
           <v-img
               class="mb-2"
-              v-if="data.srcPreviewKTP !== null"
+              v-if="data.fotoKTP !== null"
               contain
               width="100%"
               max-height="150px"
-              :src="data.srcPreviewKTP"
+              :src="generateImagePreviewSrc(data.fotoKTP)"
           ></v-img>
         </DataItem>
         <DataItem label="Foto Kartu Keluarga" :value="data.fotoKartuKeluarga.name">
           <v-img
               class="mb-2"
-              v-if="data.srcPreviewKK !== null"
+              v-if="data.fotoKartuKeluarga !== null"
               contain
               width="100%"
               max-height="150px"
-              :src="data.srcPreviewKK"
+              :src="generateImagePreviewSrc(data.fotoKartuKeluarga)"
           ></v-img>
         </DataItem>
         <DataItem label="Umur" :value="data.umur" />
@@ -54,11 +54,16 @@
 
 <script>
 import DataItem from "@/components/DataItem";
+import {generateImagePreviewSrc} from "@/utils/helper";
+
 export default {
   name: "PreviewPenerima",
   components: {DataItem},
   props: {
     data: Object
+  },
+  methods: {
+    generateImagePreviewSrc
   }
 }
 </script>

@@ -304,6 +304,7 @@ import {
   JENIS_KELAMIN,
   ALASAN_BANTUAN,
 } from "@/utils/constant";
+import {generateImagePreviewSrc} from "@/utils/helper";
 
 export default {
   name: "FormulirPenerima",
@@ -433,12 +434,10 @@ export default {
   },
   computed: {
     srcPreviewKTP() {
-      return this.generateImagePreviewSrc(this.formData.fotoKTP);
+      return generateImagePreviewSrc(this.formData.fotoKTP);
     },
     srcPreviewKK() {
-      return this.generateImagePreviewSrc(
-        this.formData.fotoKartuKeluarga
-      );
+      return generateImagePreviewSrc(this.formData.fotoKartuKeluarga);
     },
   },
   mounted() {
@@ -475,5 +474,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
