@@ -365,52 +365,68 @@ export default {
   methods: {
     numberToRupiah,
     async getProvinsi() {
-      this.provinsiList.isLoading = true;
+      try {
+        this.provinsiList.isLoading = true;
 
-      const result = await fetch(`${EMSIFA_WILAYAH_API}/provinces.json`);
+        const result = await fetch(`${EMSIFA_WILAYAH_API}/provinces.json`);
 
-      this.provinsiList.data = await result.json();
-
-      this.provinsiList.isLoading = false;
+        this.provinsiList.data = await result.json();
+      } catch (e) {
+        this.provinsiList.data = [];
+      } finally {
+        this.provinsiList.isLoading = false;
+      }
     },
     async getKabKota() {
-      this.kabKotaList.isLoading = true;
+      try {
+        this.kabKotaList.isLoading = true;
 
-      if (this.formData.provinsi.id) {
-        const result = await fetch(
-          `${EMSIFA_WILAYAH_API}/regencies/${this.formData.provinsi.id}.json`
-        );
+        if (this.formData.provinsi.id) {
+          const result = await fetch(
+              `${EMSIFA_WILAYAH_API}/regencies/${this.formData.provinsi.id}.json`
+          );
 
-        this.kabKotaList.data = await result.json();
+          this.kabKotaList.data = await result.json();
+        }
+      } catch (e) {
+        this.kabKotaList.data = [];
+      } finally {
+        this.kabKotaList.isLoading = false;
       }
-
-      this.kabKotaList.isLoading = false;
     },
     async getKecamatan() {
-      this.kecamatanList.isLoading = true;
+      try {
+        this.kecamatanList.isLoading = true;
 
-      if (this.formData.kabKota.id) {
-        const result = await fetch(
-          `${EMSIFA_WILAYAH_API}/districts/${this.formData.kabKota.id}.json`
-        );
+        if (this.formData.kabKota.id) {
+          const result = await fetch(
+              `${EMSIFA_WILAYAH_API}/districts/${this.formData.kabKota.id}.json`
+          );
 
-        this.kecamatanList.data = await result.json();
+          this.kecamatanList.data = await result.json();
+        }
+      } catch (e) {
+        this.kecamatanList.data = [];
+      } finally {
+        this.kecamatanList.isLoading = false;
       }
-
-      this.kecamatanList.isLoading = false;
     },
     async getKelurahanDesa() {
-      this.kelurahanDesaList.isLoading = true;
+      try {
+        this.kelurahanDesaList.isLoading = true;
 
-      if (this.formData.kecamatan.id) {
-        const result = await fetch(
-          `${EMSIFA_WILAYAH_API}/villages/${this.formData.kecamatan.id}.json`
-        );
+        if (this.formData.kecamatan.id) {
+          const result = await fetch(
+              `${EMSIFA_WILAYAH_API}/villages/${this.formData.kecamatan.id}.json`
+          );
 
-        this.kelurahanDesaList.data = await result.json();
+          this.kelurahanDesaList.data = await result.json();
+        }
+      } catch (e) {
+        this.kelurahanDesaList.data = [];
+      } finally {
+        this.kelurahanDesaList.isLoading = false;
       }
-
-      this.kelurahanDesaList.isLoading = false;
     },
     validateFile(file) {
       if (file !== null && !file.type.includes("image")) {
