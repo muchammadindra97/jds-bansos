@@ -28,10 +28,10 @@
         </DataItem>
         <DataItem label="Umur" :value="data.umur" />
         <DataItem label="Jenis Kelamin" :value="data.jenisKelamin.text" />
-        <DataItem label="Provinsi" :value="data.provinsi.name ?? data.provinsi" />
-        <DataItem label="Kab/Kota" :value="data.kabKota.name ?? data.kabKota" />
-        <DataItem label="Kecamatan" :value="data.kecamatan.name ?? data.kecamatan" />
-        <DataItem label="Kelurahan/Desa" :value="data.kelurahanDesa.name ?? data.kelurahanDesa" />
+        <DataItem label="Provinsi" :value="data.provinsi.name ? data.provinsi.name : data.provinsi" />
+        <DataItem label="Kab/Kota" :value="data.kabKota.name ? data.kabKota.name : data.kabKota" />
+        <DataItem label="Kecamatan" :value="data.kecamatan.name ? data.kecamatan.name : data.kecamatan" />
+        <DataItem label="Kelurahan/Desa" :value="data.kelurahanDesa.name ? data.kelurahanDesa.name : data.kelurahanDesa" />
         <DataItem label="Alamat" :value="data.alamat" />
         <DataItem label="RT" :value="data.rt" />
         <DataItem label="RW" :value="data.rw" />

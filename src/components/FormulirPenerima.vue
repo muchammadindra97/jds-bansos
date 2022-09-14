@@ -266,10 +266,10 @@
               class="mb-2"
               outlined
               v-model="formData.alasanLainnya"
-              v-if="formData.alasan?.value === 'LAINNYA'"
+              v-if="formData.alasan && formData.alasan.value === 'LAINNYA'"
               label="Deskripsi alasan lainnya"
               :rules="[
-                (v) => (formData.alasan?.value === 'LAINNYA' && !!v) || 'Isian deskripsi alasan lainnya tidak boleh kosong!'
+                (v) => (formData.alasan && formData.alasan.value === 'LAINNYA' && !!v) || 'Isian deskripsi alasan lainnya tidak boleh kosong!'
               ]"
           ></v-textarea>
 
