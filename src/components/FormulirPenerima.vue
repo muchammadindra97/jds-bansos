@@ -220,6 +220,8 @@
               type="number"
               min=0
               label="Penghasilan sebelum pandemi"
+              :hint="numberToRupiah(formData.penghasilanSebelum)"
+              persistent-hint
               required
               :rules="[
                 (v) => !!v || 'Isian penghasilan sebelum pandemi tidak boleh kosong!',
@@ -235,6 +237,8 @@
               type="number"
               min=0
               label="Penghasilan setelah pandemi"
+              :hint="numberToRupiah(formData.penghasilanSesudah)"
+              persistent-hint
               required
               :rules="[
                 (v) => !!v || 'Isian penghasilan setelah pandemi tidak boleh kosong!',
@@ -305,7 +309,7 @@ import {
   JENIS_KELAMIN,
   ALASAN_BANTUAN,
 } from "@/utils/constant";
-import {generateImagePreviewSrc, fetchBackend} from "@/utils/helper";
+import {generateImagePreviewSrc, fetchBackend, numberToRupiah} from "@/utils/helper";
 
 export default {
   name: "FormulirPenerima",
@@ -359,6 +363,7 @@ export default {
     };
   },
   methods: {
+    numberToRupiah,
     async getProvinsi() {
       this.provinsiList.isLoading = true;
 

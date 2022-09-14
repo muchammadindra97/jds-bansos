@@ -35,8 +35,8 @@
         <DataItem label="Alamat" :value="data.alamat" />
         <DataItem label="RT" :value="data.rt" />
         <DataItem label="RW" :value="data.rw" />
-        <DataItem label="Penghasilan sebelum pandemi" :value="data.penghasilanSebelum" />
-        <DataItem label="Penghasilan setelah pandemi" :value="data.penghasilanSesudah" />
+        <DataItem label="Penghasilan sebelum pandemi" :value="numberToRupiah(data.penghasilanSebelum)" />
+        <DataItem label="Penghasilan setelah pandemi" :value="numberToRupiah(data.penghasilanSesudah)" />
         <DataItem label="Alasan membutuhkan bantuan" :value="data.alasan.text" />
         <DataItem v-if="data.alasan.value === 'LAINNYA'" label="Deskripsi alasan lainnya" :value="data.alasanLainnya" />
 
@@ -54,7 +54,7 @@
 
 <script>
 import DataItem from "@/components/DataItem";
-import {generateImagePreviewSrc} from "@/utils/helper";
+import {generateImagePreviewSrc, numberToRupiah} from "@/utils/helper";
 
 export default {
   name: "PreviewPenerima",
@@ -63,7 +63,8 @@ export default {
     data: Object
   },
   methods: {
-    generateImagePreviewSrc
+    generateImagePreviewSrc,
+    numberToRupiah
   }
 }
 </script>

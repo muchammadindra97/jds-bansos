@@ -27,3 +27,12 @@ export function fetchBackend(data) {
     }, 1500);
   });
 }
+
+export function numberToRupiah(number) {
+  const options = {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }
+
+  return 'Rp' + (new Intl.NumberFormat('id-ID', options).format(number));
+}
