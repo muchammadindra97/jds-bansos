@@ -417,9 +417,9 @@ export default {
         return "File yang dipilih bukan gambar!";
       } else if (file !== null && file.size > 2 * 1024 * 1024) {
         return "Ukuran file maksimal 2 MiB!";
-      } else {
-        this.fileTypeError.fotoKTP = null;
       }
+
+      return null;
     },
     async submit() {
       try {
