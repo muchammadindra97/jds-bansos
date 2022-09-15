@@ -315,7 +315,7 @@ import {
   JENIS_KELAMIN,
   ALASAN_BANTUAN,
 } from "@/utils/constant";
-import {generateImagePreviewSrc, fetchBackend, numberToRupiah} from "@/utils/helper";
+import {generateImagePreviewSrc, fetchBackend, numberToRupiah, validateFile} from "@/utils/helper";
 
 export default {
   name: "FormulirPenerima",
@@ -434,15 +434,6 @@ export default {
         this.kelurahanDesaList.isLoading = false;
       }
     },
-    validateFile(file) {
-      if (file !== null && !file.type.includes("image")) {
-        return "File yang dipilih bukan gambar!";
-      } else if (file !== null && file.size > 2 * 1024 * 1024) {
-        return "Ukuran file maksimal 2 MiB!";
-      }
-
-      return null;
-    },
     async submit() {
       try {
         this.isSubmitting = true;
@@ -506,10 +497,10 @@ export default {
       }
     },
     "formData.fotoKTP": function (value) {
-      this.fileTypeError.fotoKTP = this.validateFile(value);
+      this.fileTypeError.fotoKTP = validateFile(value);
     },
     "formData.fotoKartuKeluarga": function (value) {
-      this.fileTypeError.fotoKartuKeluarga = this.validateFile(value);
+      this.fileTypeError.fotoKartuKeluarga = validateFile(value);
     },
   },
 };

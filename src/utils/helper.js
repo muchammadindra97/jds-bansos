@@ -36,3 +36,13 @@ export function numberToRupiah(number) {
 
   return 'Rp' + (new Intl.NumberFormat('id-ID', options).format(number));
 }
+
+export function validateFile(file) {
+  if (file !== null && !file.type.includes("image")) {
+    return "File yang dipilih bukan gambar!";
+  } else if (file !== null && file.size > 2 * 1024 * 1024) {
+    return "Ukuran file maksimal 2 MiB!";
+  }
+
+  return null;
+}
