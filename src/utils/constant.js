@@ -1,4 +1,4 @@
-export const EMSIFA_WILAYAH_API = "http://www.emsifa.com/api-wilayah-indonesia/api";
+export const EMSIFA_WILAYAH_API = "https://www.emsifa.com/api-wilayah-indonesia/api";
 
 export const JENIS_KELAMIN = [
   {
