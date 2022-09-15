@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card max-width="750px" elevation="2" class="mx-auto">
-      <v-card-title>Formulir Penerima</v-card-title>
+      <v-card-title data-cy="title-formulirPenerima">Formulir Penerima</v-card-title>
       <v-card-text>
         <v-form ref="form" v-model="isFormValid" lazy-validation>
           <v-text-field
@@ -50,6 +50,7 @@
               outlined
               v-model="formData.fotoKTP"
               label="Foto KTP"
+              data-cy="inputfile-fotoKTP"
               truncate-length="22"
               :show-size="1024"
               required
@@ -61,6 +62,7 @@
           <v-img
               class="mb-2"
               v-if="srcPreviewKTP !== null"
+              data-cy="img-previewKTP"
               contain
               width="100%"
               max-height="150px"
@@ -72,6 +74,7 @@
               outlined
               v-model="formData.fotoKartuKeluarga"
               label="Foto Kartu Keluarga"
+              data-cy="inputfile-fotoKK"
               truncate-length="22"
               :show-size="1024"
               required
@@ -83,6 +86,7 @@
           <v-img
               class="mb-2"
               v-if="srcPreviewKK !== null"
+              data-cy="img-previewKK"
               contain
               width="100%"
               max-height="150px"
@@ -256,6 +260,7 @@
               clearable
               return-object
               @input="formData.alasanLainnya = null"
+              data-cy="select-alasan"
               :rules="[
                 (v) => !!v || 'Isian alasan membutuhkan bantuan tidak boleh kosong!'
               ]"
@@ -268,6 +273,7 @@
               v-model="formData.alasanLainnya"
               v-if="formData.alasan && formData.alasan.value === 'LAINNYA'"
               label="Deskripsi alasan lainnya"
+              data-cy="textarea-alasanLainnya"
               :rules="[
                 (v) => (formData.alasan && formData.alasan.value === 'LAINNYA' && !!v) || 'Isian deskripsi alasan lainnya tidak boleh kosong!'
               ]"

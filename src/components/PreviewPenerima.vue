@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card max-width="750px" elevation="2" class="mx-auto">
-      <v-card-title>Data Penerima Terkirim</v-card-title>
+      <v-card-title data-cy="title-previewPenerima">Data Penerima Terkirim</v-card-title>
       <v-card-text>
         <DataItem label="Nama" :value="data.name" />
         <DataItem label="NIK" :value="data.nik" />
